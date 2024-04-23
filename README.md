@@ -14,9 +14,17 @@ pinned: false
 ## 压缩率 Compress Rate
 
 
-在 [cc-100](https://huggingface.co/datasets/cc100) 数据集，每个语言取1万条数据，测试不同tokenizer的压缩率。压缩率指标 `g_bytes/b_tokens`
+在 [cc-100](https://huggingface.co/datasets/cc100) 数据集，每个语言取1万条数据，测试不同tokenizer的压缩率。
 
-您可通过以下脚本进行复现 
+> 压缩率示例：
+llama3扩充了词典，具有更高的压缩比。同样1T字节的简体中文语料，llama分词后是 0.56万亿个token，llama3只需要0.31万亿个token。
+
+| tokenizer                    |   vocab_size |    t_bytes/t_tokens |   t_tokens/t_bytes |   n_chars/n_tokens |
+|:-----------------------------|-------------:|-------------------:|-------------------:|-------------------:|
+| llama                        |        32000 |               1.8  |               0.56 |               0.7  |
+| llama3                       |       128000 |               3.2  |               0.31 |               1.24 |
+
+可通过以下脚本进行复现 
 ```sh
 python utils/compress_rate_util.py 
 ```
